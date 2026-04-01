@@ -95,12 +95,11 @@ c1.metric("CA total",            f"{df['Revenue_EUR'].sum()/1e9:.1f} Md €")
 c2.metric("Ventes totales",      f"{int(df['Units_Sold'].sum()):,}")
 c3.metric("Part électrique",     f"{df['BEV_Share'].mean():.1%}")
 c4.metric("Part premium",        f"{df['Premium_Share'].mean():.1%}")
-c5.metric("Q1 ventes",           f"{int(q1):,}")
-c6.metric("Q3 ventes",           f"{int(q3):,}")
+
 
 st.info(f"ℹ️ 75% des lignes ont vendu **{int(q3):,} véhicules ou moins** (Q3)")
 
-# ── ÉVOLUTION DES VENTES ───────────────────────────────────────────────────────
+# ÉVOLUTION DES VENTES 
 st.subheader("Évolution des ventes")
 
 fig = px.line(
@@ -111,7 +110,7 @@ fig = px.line(
 )
 st.plotly_chart(dark(fig), use_container_width=True)
 
-# ── BOXPLOT VENTES PAR MODÈLE ──────────────────────────────────────────────────
+#  BOXPLOT VENTES PAR MODÈLE
 # le boxplot est le meilleur graphique pour voir médiane, Q1/Q3 et outliers d'un coup
 st.subheader("Distribution des ventes par modèle (Boxplot)")
 
@@ -121,7 +120,7 @@ fig = px.box(df, x="Model", y="Units_Sold", color="Model",
              labels={"Units_Sold": "Ventes", "Model": "Modèle"})
 st.plotly_chart(dark(fig), use_container_width=True)
 
-# ── HISTOGRAMME CA + TEST DE NORMALITÉ ────────────────────────────────────────
+# HISTOGRAMME CA + TEST DE NORMALITÉ
 # l'histogramme permet de voir si la distribution est normale ou asymétrique
 st.subheader("Distribution du chiffre d'affaires")
 
@@ -146,7 +145,7 @@ with col2:
     else:
         alert("p ≥ 0.05 → Distribution normale → vous pouvez utiliser Pearson.", "success")
 
-# ── CORRÉLATION INTERACTIVE ────────────────────────────────────────────────────
+# CORRÉLATION INTERACTIVE 
 st.subheader("Analyse de corrélation")
 
 num_vars = ["Units_Sold", "Revenue_EUR", "BEV_Share", "Premium_Share", "GDP_Growth", "Fuel_Price_Index"]
